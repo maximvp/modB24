@@ -504,8 +504,6 @@ class Actions
         }
 
         if (empty($file['ID'])) {
-            file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/error_fileObject.txt",
-                "PARAMS: " . var_export('Non file!', true) . PHP_EOL, FILE_APPEND);
             return false;
         }
     }
