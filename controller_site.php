@@ -27,8 +27,6 @@ if (!empty($user_id)) {
 
         $openLineMess = \Bitrix\ImConnector\CustomConnectors::sendMessages('ithive_connect', $idOpenLine,
             [$chatParams['messenge']]);
-    //file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/openLineMess.txt", "AR_CHAT: " . var_export($openLineMess, true) . PHP_EOL, FILE_APPEND);
-
 
         if (\Bitrix\Main\Loader::includeModule('pull')) {
             \Bitrix\Pull\Event::send();
