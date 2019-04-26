@@ -255,7 +255,6 @@ class Vkattachment extends Actions
                 $attachments = 'doc' . $doc['owner_id'] . '_' . $doc['id'];
                 break;
         }
-        //file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/prepareAttache.txt", "PARAMS: " . var_export([$fileCopy,$file_patch, $attachments], true) . PHP_EOL, FILE_APPEND);
 
         if (!empty($attachments)) {
             return ['attachments' => $attachments, 'fileCopy' => $fileCopy];
@@ -273,7 +272,6 @@ class Vkattachment extends Actions
     {
         $params = [
             'group_id' => abs(Option::get("ithive.openlinesadditional", 'field_id_grup')),
-            //COption::GetOptionString("ithive.openlinesadditional",'field_id_grup'),
             'filter' => 'managers',
             'sort' => 'id_asc'
         ];
