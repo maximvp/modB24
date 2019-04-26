@@ -45,7 +45,7 @@ class Actions
      * адреса систем для отправки сообщений
     */
     public static $systemUrls = array(
-        "site" => "https://vkusvill.ru/",
+        "site" => "https://",
         "vk" => "https://api.vk.com/method/"
     );
 
@@ -54,12 +54,12 @@ class Actions
     */
     private static $systemAuth = array(
         "site" => array(
-            "login" => "Vkusvill",
-            "pass" => "SkwJW0Z5m7",
+            "login" => "",
+            "pass" => "",
         ),
         "vk" => array(
-            "login" => "Vkusvill",
-            "pass" => "SkwJW0Z5m7",
+            "login" => "",
+            "pass" => "",
         ),
     );
 
@@ -253,7 +253,7 @@ class Actions
         $userLastName = $data->object->last_name;
         $userEmail = $data->object->email;
 
-        $chatUrl = 'https://vkusvill.ru/node/' . $nid . '#comment-' . $cid;
+        $chatUrl = 'https://..../node/' . $nid . '#comment-' . $cid;
         $chatName = 'chat_' . $nid . '_vkusvill_site';
 
         $message_data = [
@@ -292,7 +292,7 @@ class Actions
             "commentId" => $replyToComment,
         );
 
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/userInfoReply.txt", "PARAMS: " . var_export([$params,$message_data], true) . PHP_EOL, FILE_APPEND);
+        //file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/userInfoReply.txt", "PARAMS: " . var_export([$params,$message_data], true) . PHP_EOL, FILE_APPEND);
 
 
         $result = ['messenge' => $message_data, 'params' => $params];
@@ -465,7 +465,7 @@ class Actions
     }
 
     /*
-     * получене данных об зарегсрванном файле
+     * получене данных об зарегестриванном файле
      * $objectId - id файла или объекта,
      * что указываем id файл или obj объект в  $where
      */
