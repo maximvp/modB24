@@ -21,8 +21,7 @@ switch ($data->type) {
 
     case 'wall_reply_new':
         $user_id = $data->object->from_id;
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/connector.txt", "AR_CHAT: " . var_export($data, true) . PHP_EOL, FILE_APPEND);
-
+        
         if($data->secret != $confOptions){
             echo('ok');
             break;
