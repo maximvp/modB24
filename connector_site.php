@@ -14,8 +14,7 @@ $confOptions = COption::GetOptionString("ithive.openlinesadditional",'field_site
 switch ($data->type) {
     case 'site_drupal':
         $user_id = $data->object->uid;
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/connector_site.txt", "AR_CHAT: " . var_export($data, true) . PHP_EOL, FILE_APPEND);
-
+        
         if($data->secret != $confOptions){
 
             break;
