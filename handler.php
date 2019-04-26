@@ -47,7 +47,6 @@ class Handler
 
         if ($arFields['CHAT_AUTHOR_ID'] == '0' or $arFields['SYSTEM']  == 'Y') return;
 
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/afterExistChat.txt", "PARAMS: " . var_export($existChat, true) . PHP_EOL, FILE_APPEND);
 
         /*
         *  три проверки - если сообщение отправил Клиент, то ничего не делаем или системное сообщение
@@ -78,7 +77,6 @@ class Handler
             /*
              * обработка отправки данных во внешнюю систему
             */
-            //file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/afterMsgSendHandler1.txt", "PARAMS: " . var_export($arChat, true) . PHP_EOL, FILE_APPEND);
 
             $access_key = '';
             switch ($arChat["SYSTEM_TYPE"]) {
@@ -123,7 +121,6 @@ class Handler
 
             }
 
-            //file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/logEvent.txt", "ID: " . var_export($messageID, true) . PHP_EOL, FILE_APPEND);
           }
         unset($messageID,$arChat,$arFields);
     }
@@ -146,23 +143,7 @@ class Handler
 
         $chatId = trim($arFields['CHAT_ID']);
 
-//        $filter = [
-//            "OL_CHAT_ID" => $chatId,
-//            "SYSTEM_TYPE" => 'VK',
-//        ];
-//
-//        $select = [''];
-//
-//        $parameters = [
-//            'select' => $select,
-//            'filter' => $filter
-//        ];
-//
-//        OlTable::getList($parameters);
-
         $idObj = $arFields['FILE_ID'];
-
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/OnAfterFile.txt", "PARAMS: " . var_export($arFields, true) . PHP_EOL, FILE_APPEND);
 
         $chatFilter = ["OL_CHAT_ID" => $chatId];
 
@@ -192,31 +173,10 @@ class Handler
                 );
                 $res = Vkattachment::messagesSend($params);
 
-                file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/OnAfterFileUpload.txt", "PARAMS: " . var_export([$res, $arChat, $params], true) . PHP_EOL, FILE_APPEND);
-
             }
 
-            //file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/OnAfterFileUpload.txt", "PARAMS: " . var_export([$save_response, $upload_server_response, $upload_response,  $attachments], true) . PHP_EOL, FILE_APPEND);
-
         }
 
-        if($arChat['SYSTEM_TYPE'] == 'ST'){
-
-//            $idFile = Actions::fileObject($idObj, 'obj');
-//
-//            $fileArray = \CFile::GetFileArray($idFile['FILE_ID']);
-//
-//            $newFilePath = $fileArray['SUBDIR'] . '/' . $fileArray['ORIGINAL_NAME'];
-//
-//            $fileCopy = \CFile::CopyFile($idFile['FILE_ID'], true, $newFilePath);
-//
-//            //новый файл с оригинальным именем
-//            $file_patch = $_SERVER['DOCUMENT_ROOT'] . '/upload/' . $newFilePath;
-//
-//            file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/FileUpload.txt", "PARAMS: " . var_export($file_patch, true) . PHP_EOL, FILE_APPEND);
-//
-//            \CFile::Delete($fileCopy);
-        }
         unset($arChat,$arFields);
 
     }
@@ -279,36 +239,6 @@ class Handler
                 'url' => '//opt-560835.ssl.1c-bitrix-cdn.ru/bitrix/templates/1c-bitrix-new/images/logo.png?1'
             )
         );
-    }
-
-    function OnSendMessageCustomHandler($event)
-    {
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/OnSendMessageCustomHandler.txt", "ID: " . var_export($event, true) . PHP_EOL, FILE_APPEND);
-
-//        $connector = $event->getParameter('CONNECTOR');
-//        $line = $event->getParameter('LINE');
-//        $data = $event->getParameter('DATA');
-
-//        foreach ($data as $message)
-//        {
-//            $statusDelivery[]= array(
-//                'im' => $message['im'],
-//                'message' => array(
-//                    'id' => array(5),
-//                ),
-//                'chat' => array(
-//                    'id' => $message['chat']['id']
-//                ),
-//            );
-//        }
-//
-//        if(!empty($statusDelivery))
-//        {
-//            \Bitrix\ImConnector\CustomConnectors::sendStatusDelivery($connector, $line,
-//                $statusDelivery);
-//        }
-
-
     }
 
 }
