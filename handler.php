@@ -13,8 +13,7 @@ class Handler
         /*
          * внесение записи id чата ОЛ в таблицу
          */
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/afterMsgSendHandler.txt", "PARAMS: " . var_export($arFields, true) . PHP_EOL, FILE_APPEND);
-
+        
         if(!empty($arFields['CHAT_ENTITY_ID'])){
             $arChatId = explode('|', $arFields['CHAT_ENTITY_ID']);
             $chatId = $arChatId[2];
@@ -94,11 +93,9 @@ class Handler
                     );
                     if(!empty($arFields["MESSAGE"])){
                         $res = Vkattachment::messagesSend($params);
-                        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/logEvent1.txt", "ID: " . var_export([$params,$res], true) . PHP_EOL, FILE_APPEND);
-
+                        
                     }
-                    file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/afterMsgSendHandler.txt", "PARAMS: " . var_export([$params,$arChat,$arFields], true) . PHP_EOL, FILE_APPEND);
-
+                    
                     break;
                 /*
                  * отправка данных на сайте ВкусВилл (Drupal)
@@ -110,8 +107,7 @@ class Handler
                         "reply_to_comment" => $arChat["POST_ID"]
                     );
                     $action = Actions::preparSendToSite($params);
-                    file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/action.txt", "PARAMS: " . var_export($action, true) . PHP_EOL, FILE_APPEND);
-
+                    
                     break;
                 /*
                  * обработка данных по-умолчанию
@@ -155,8 +151,6 @@ class Handler
         if($arChat['SYSTEM_TYPE'] == 'VK'){
 
             $attachments = Vkattachment::prepareAttache($idObj);
-            file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/FileUpload.txt", "PARAMS: " . var_export([$attachments,$arChat, $arFields], true) . PHP_EOL, FILE_APPEND);
-
 
             //удаляем копию файла из базы и физически
             if(!empty($attachments['attachments'])){
@@ -229,9 +223,9 @@ class Handler
             //ID
             'id' => '34356555',
             //Ссылка на канал
-            'url' => 'https://vkusvill.ru/ithive_get_json',
+            'url' => 'https://',
             //Ссылка для мобильных устройств
-            'url_im' => 'https://vkusvill.ru/ithive_get_json',
+            'url_im' => 'https://',
             //Отображаемое имя
             'name' => 'IThive коннектор',
             //Картинка
