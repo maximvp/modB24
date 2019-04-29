@@ -22,7 +22,7 @@ class Vkattachment extends Actions
     }
 
     /**
-     * получение параметров для загрузки офтографии
+     * получение параметров для загрузки фотографии
      * @param $peer_id
      * @return mixed
      * @throws \Exception
@@ -111,17 +111,14 @@ class Vkattachment extends Actions
         $json = curl_exec($curl);
         $error = curl_error($curl);
         if ($error) {
-            file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/error_call.txt",
-                '[' . date('Y-m-d H:i:s') . ']' . var_export($error, true) . PHP_EOL, FILE_APPEND);
-
             throw new \Exception("Failed {$method} request");
         }
         curl_close($curl);
         $response = json_decode($json, true);
 
         if (!$response || !isset($response['response'])) {
-            file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/error_call.txt",
-                '[' . date('Y-m-d H:i:s') . ']' . var_export($response, true) . PHP_EOL, FILE_APPEND);
+            //file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/error_call.txt",
+                //'[' . date('Y-m-d H:i:s') . ']' . var_export($response, true) . PHP_EOL, FILE_APPEND);
             //throw new \Exception("Invalid response for {$method} request");
         }
 
@@ -148,9 +145,6 @@ class Vkattachment extends Actions
         $json = curl_exec($curl);
         $error = curl_error($curl);
         if ($error) {
-            file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/error_upload.txt",
-                '[' . date('Y-m-d H:i:s') . ']' . var_export($error, true) . PHP_EOL, FILE_APPEND);
-
             throw new \Exception("Failed {$url} request");
         }
         curl_close($curl);
@@ -159,9 +153,6 @@ class Vkattachment extends Actions
         if (!$response) {
             throw new \Exception("Invalid response for {$url} request");
         }
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/local/log/upload.txt",
-            "PARAMS: " . var_export($response, true) . PHP_EOL, FILE_APPEND);
-
         return $response;
     }
 
